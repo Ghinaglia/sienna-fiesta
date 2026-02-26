@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 Segundo Añito de {{ event.baby_name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Fondo de estrellas animadas -->
+<div class="stars-bg" id="starsBg"></div>
+
+<!-- Confeti container -->
+<div id="confetti-container"></div>
+
+<!-- Personaje izquierda -->
+<div class="side-character left" id="charLeft">
+    <img src="{{ url_for('static', filename='lulipanpin.png') }}" alt="Lulipanpin">
+</div>
+
+<!-- Personaje derecha -->
+<div class="side-character right" id="charRight">
+    <img src="{{ url_for('static', filename='lulipanpin3.png') }}" alt="Lulipanpin">
+</div>
+
+<!-- Arco superior dorado -->
+<div class="stage-arch">
+    <div class="arch-inner">
+        <span class="arch-star">⭐</span>
+        <span class="arch-text">✨ Una noche mágica te espera ✨</span>
+        <span class="arch-star">⭐</span>
+    </div>
+    <!-- Cortinas -->
+    <div class="curtain curtain-left"></div>
+    <div class="curtain curtain-right"></div>
+</div>
+
+<!-- Tarjeta principal -->
+<main class="invitation-card" id="card">
+
+    <!-- Hero con foto de Lulipanpin -->
+    <div class="hero-section">
+        <div class="hero-glow"></div>
+        <img
+            src="{{ url_for('static', filename='lulipanpin2.png') }}"
+            class="hero-img"
+            alt="Lulipanpin"
+        >
+        <div class="hero-badge">🎀 Invitación Especial 🎀</div>
+    </div>
+
+    <!-- Nombre de la bebé -->
+    <div class="name-section">
+        <p class="pre-title">🌟 Celebramos el segundo añito de 🌟</p>
+        <h1 class="baby-name">{{ event.baby_name }}</h1>
+        <h2 class="baby-lastname">{{ event.last_name }}</h2>
+        <div class="age-badge">
+            <span class="age-number">2</span>
+            <span class="age-label">añitos</span>
+        </div>
+    </div>
+
+    <!-- Mensaje de Lulipanpin -->
+    <div class="luli-message">
+        <div class="luli-quote-img">
+            <img src="{{ url_for('static', filename='lulipanpin.png') }}" alt="Lulipanpin">
+        </div>
+        <div class="luli-quote-text">
+            <p>¡Hola! Soy <strong>Lulipanpin</strong> y vengo a festejar con</p>
+            <p>la princesa más especial del reino 👑</p>
+            <p class="luli-sub">¡Ven a cantar, bailar y llenarla de magia! 🎤✨</p>
+        </div>
+    </div>
+
+    <!-- Info del evento -->
+    <div class="event-info-section">
+        <h3 class="section-title">📅 Los detalles del gran día</h3>
+        <div class="event-grid">
+            <div class="event-card">
+                <div class="event-icon">📅</div>
+                <div class="event-label">Fecha</div>
+                <div class="event-value">{{ event.date }}</div>
+            </div>
+            <div class="event-card">
+                <div class="event-icon">⏰</div>
+                <div class="event-label">Hora</div>
+                <div class="event-value">{{ event.time }}</div>
+            </div>
+            <div class="event-card wide">
+                <div class="event-icon">📍</div>
+                <div class="event-label">Lugar</div>
+                <div class="event-value">{{ event.location_name }}</div>
+                <div class="event-address">{{ event.address }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuenta regresiva -->
+    <div class="countdown-section">
+        <p class="countdown-label">🎉 ¡El gran día llega en!</p>
+        <div id="countdown" class="countdown-boxes">
+            <div class="time-box" id="days-box">
+                <span class="time-num" id="days">--</span>
+                <span class="time-label">días</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-box" id="hours-box">
+                <span class="time-num" id="hours">--</span>
+                <span class="time-label">horas</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-box" id="mins-box">
+                <span class="time-num" id="mins">--</span>
+                <span class="time-label">minutos</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-box" id="secs-box">
+                <span class="time-num" id="secs">--</span>
+                <span class="time-label">segundos</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Galería de Lulipanpin -->
+    <div class="gallery-section">
+        <h3 class="section-title">🌈 ¡Lulipanpin te espera!</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item item-main">
+                <img src="{{ url_for('static', filename='Contrataralulipampin.jpg') }}" alt="Lulipanpin en la fiesta" class="gallery-party">
+                <div class="gallery-overlay">
+                    <span>¡Así festejamos! 🎉</span>
+                </div>
+            </div>
+            <div class="gallery-item item-side">
+                <img src="{{ url_for('static', filename='lulipanpin3.png') }}" alt="Lulipanpin">
+                <div class="gallery-overlay">
+                    <span>¡Besos mágicos! 💋</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario RSVP -->
+    <div class="rsvp-section">
+        <h3 class="section-title">💌 Confirma tu asistencia</h3>
+        <p class="rsvp-subtitle">¡Queremos saber que vendrás a la magia! ✨</p>
+
+        {% if confirmed %}
+        <div class="confirmed-msg">
+            <div class="confirmed-icon">🎉</div>
+            <p>¡Gracias! Tu confirmación fue registrada.</p>
+            <p>¡Nos vemos en la fiesta! 💖</p>
+        </div>
+        {% else %}
+        <form class="rsvp-form" action="/" method="POST">
+            <div class="form-group">
+                <label>Tu nombre completo</label>
+                <input type="text" name="name" placeholder="Ej: María González" required>
+            </div>
+            <div class="form-group">
+                <label>¿Cuántos acompañantes traes?</label>
+                <select name="companions">
+                    <option value="0">Vengo solo/a</option>
+                    <option value="1">+1 acompañante</option>
+                    <option value="2">+2 acompañantes</option>
+                    <option value="3">+3 acompañantes</option>
+                    <option value="4">+4 o más</option>
+                </select>
+            </div>
+            <button type="submit" class="rsvp-btn">
+                <span>🎀 ¡Confirmar Asistencia!</span>
+            </button>
+        </form>
+        {% endif %}
+    </div>
+
+    <!-- Botón de música -->
+    <div class="music-section">
+        <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+            <span class="music-icon">🎵</span>
+            <span class="music-text">Activar Música Mágica</span>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+        <p>Con todo el amor del mundo para <strong>{{ event.baby_name }}</strong> 💖</p>
+        <div class="footer-hearts">💗 💛 💗 💛 💗</div>
+    </div>
+
+</main>
+
+<!-- Piso del escenario -->
+<div class="stage-floor"></div>
+
+<audio id="bg-music" loop>
+    <source src="{{ url_for('static', filename='music.mp3') }}" type="audio/mpeg">
+</audio>
+
+<script>
+// =====================
+//  MÚSICA
+// =====================
+let musicPlaying = false;
+const music = document.getElementById("bg-music");
+
+document.addEventListener("click", function() {
+    if (!musicPlaying) {
+        music.play().catch(() => {});
+        musicPlaying = true;
+        updateMusicBtn();
+    }
+}, { once: true });
+
+function toggleMusic() {
+    if (musicPlaying) {
+        music.pause();
+        musicPlaying = false;
+    } else {
+        music.play().catch(() => {});
+        musicPlaying = true;
+    }
+    updateMusicBtn();
+}
+
+function updateMusicBtn() {
+    const btn = document.getElementById("musicBtn");
+    const icon = btn.querySelector(".music-icon");
+    const text = btn.querySelector(".music-text");
+    if (musicPlaying) {
+        icon.textContent = "⏸";
+        text.textContent = "Pausar Música";
+        btn.classList.add("playing");
+    } else {
+        icon.textContent = "🎵";
+        text.textContent = "Activar Música Mágica";
+        btn.classList.remove("playing");
+    }
+}
+
+// =====================
+//  CUENTA REGRESIVA
+// =====================
+function updateCountdown() {
+    const eventDate = new Date("February 3, 2027 16:00:00").getTime();
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "<p class='party-time'>🎉 ¡HOY ES EL DÍA! 🎉</p>";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = String(days).padStart(2, '0');
+    document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+    document.getElementById("mins").textContent = String(mins).padStart(2, '0');
+    document.getElementById("secs").textContent = String(secs).padStart(2, '0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// =====================
+//  CONFETI 🎊
+// =====================
+const CONFETTI_COLORS = ["#ff69b4","#ffd700","#ff1493","#c084fc","#fb923c","#34d399","#60a5fa","#f472b6"];
+
+function createConfetti() {
+    const el = document.createElement("div");
+    el.classList.add("confetti-piece");
+    el.style.cssText = `
+        left: ${Math.random() * 100}vw;
+        background: ${CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)]};
+        width: ${Math.random() * 10 + 6}px;
+        height: ${Math.random() * 10 + 6}px;
+        border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
+        animation-duration: ${Math.random() * 3 + 2.5}s;
+        animation-delay: ${Math.random() * 1}s;
+        transform: rotate(${Math.random() * 360}deg);
+    `;
+    document.getElementById("confetti-container").appendChild(el);
+    setTimeout(() => el.remove(), 5500);
+}
+// Menos confeti en móvil para ahorrar batería
+const isMobile = window.innerWidth < 600;
+setInterval(createConfetti, isMobile ? 300 : 120);
+
+// =====================
+//  ESTRELLAS DE FONDO
+// =====================
+const starsContainer = document.getElementById("starsBg");
+// Menos estrellas en móvil
+const starCount = window.innerWidth < 600 ? 30 : 60;
+for (let i = 0; i < starCount; i++) {
+    const star = document.createElement("div");
+    star.classList.add("bg-star");
+    star.style.cssText = `
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        width: ${Math.random() * 4 + 2}px;
+        height: ${Math.random() * 4 + 2}px;
+        animation-delay: ${Math.random() * 3}s;
+        animation-duration: ${Math.random() * 2 + 2}s;
+    `;
+    starsContainer.appendChild(star);
+}
+
+// =====================
+//  ENTRADA ANIMADA
+// =====================
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("card").classList.add("card-visible");
+        document.getElementById("charLeft").classList.add("char-visible");
+        document.getElementById("charRight").classList.add("char-visible");
+    }, 300);
+});
+</script>
+</body>
+</html>

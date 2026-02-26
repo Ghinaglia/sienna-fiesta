@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Invitados de {{ event.baby_name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #1a0030, #4a0060, #800040);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+        .container { max-width: 750px; margin: 0 auto; }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+        h1 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: #ffd700; }
+        .sub { color: #f0c0df; font-size: 0.9rem; margin-top: 4px; }
+
+        .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+        }
+        .btn-danger {
+            background: rgba(220,50,50,0.4);
+            border: 1px solid rgba(255,100,100,0.4);
+            color: white;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,215,0,0.25);
+            backdrop-filter: blur(6px);
+        }
+        .stat-num { font-family: 'Fredoka One', cursive; font-size: 2.4rem; color: #ffd700; }
+        .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Table */
+        .table-wrap {
+            background: rgba(255,255,255,0.07);
+            border-radius: 22px;
+            overflow: hidden;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            background: rgba(255,20,147,0.35);
+            padding: 14px 18px;
+            text-align: left;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            color: white;
+        }
+        td {
+            padding: 13px 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255,255,255,0.05); }
+
+        .companions-badge {
+            display: inline-block;
+            background: rgba(255,105,180,0.3);
+            border: 1px solid rgba(255,105,180,0.5);
+            color: #ffb3d9;
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .total-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.2);
+            border: 1px solid rgba(255,215,0,0.4);
+            color: #ffd700;
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .date-cell { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+
+        .delete-btn {
+            background: transparent;
+            border: 1px solid rgba(255,80,80,0.4);
+            color: rgba(255,130,130,0.8);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .delete-btn:hover {
+            background: rgba(220,50,50,0.3);
+            color: #ff9999;
+        }
+
+        .empty-state {
+            padding: 60px 20px;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 1rem;
+        }
+        .empty-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+        @media (max-width: 560px) {
+            .stats { grid-template-columns: 1fr 1fr; }
+            td, th { padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>💌 Lista de Invitados</h1>
+            <p class="sub">{{ event.baby_name }} — {{ event.date }}</p>
+        </div>
+        <div class="header-actions">
+            <a class="btn btn-outline" href="/">← Invitación</a>
+            <a class="btn btn-outline" href="/admin/logout">Cerrar sesión</a>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-num">{{ guests | length }}</div>
+            <div class="stat-label">Confirmaciones</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num">{{ total }}</div>
+            <div class="stat-label">Personas totales</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num">{{ guests | sum(attribute=2) }}</div>
+            <div class="stat-label">Acompañantes</div>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="table-wrap">
+        {% if guests %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Acomp.</th>
+                    <th>Total</th>
+                    <th>Confirmó</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for g in guests %}
+                <tr>
+                    <td style="color:rgba(255,255,255,0.4); font-size:0.8rem;">{{ loop.index }}</td>
+                    <td><strong>{{ g[1] }}</strong></td>
+                    <td><span class="companions-badge">+{{ g[2] or 0 }}</span></td>
+                    <td><span class="total-badge">{{ (g[2] or 0) + 1 }} 🧑</span></td>
+                    <td class="date-cell">{{ g[3][:16] if g[3] else "—" }}</td>
+                    <td>
+                        <form method="POST" action="/admin/delete/{{ g[0] }}" onsubmit="return confirm('¿Eliminar a {{ g[1] }}?')">
+                            <button class="delete-btn" type="submit">✕</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🎀</div>
+            <p>Todavía no hay confirmaciones.</p>
+            <p style="margin-top:6px; font-size:0.85rem;">Cuando alguien confirme asistencia, aparecerá aquí.</p>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+</body>
+</html>
