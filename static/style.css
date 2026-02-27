@@ -284,6 +284,46 @@ body {
     line-height: 1.1;
     position: relative;
     display: inline-block;
+    text-shadow:
+        0 0 10px rgba(255, 20, 147, 0.8),
+        0 0 20px rgba(255, 20, 147, 0.6),
+        0 0 40px rgba(255, 105, 180, 0.5),
+        0 0 80px rgba(255, 215, 0, 0.3);
+    animation: nameGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes nameGlow {
+    from {
+        text-shadow:
+            0 0 10px rgba(255, 20, 147, 0.8),
+            0 0 20px rgba(255, 20, 147, 0.6),
+            0 0 40px rgba(255, 105, 180, 0.5),
+            0 0 80px rgba(255, 215, 0, 0.3);
+        filter: brightness(1);
+    }
+    to {
+        text-shadow:
+            0 0 20px rgba(255, 20, 147, 1),
+            0 0 40px rgba(255, 20, 147, 0.9),
+            0 0 80px rgba(255, 105, 180, 0.8),
+            0 0 120px rgba(255, 215, 0, 0.6);
+        filter: brightness(1.2);
+    }
+}
+
+/* Brillo animado en el nombre */
+.baby-name::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.9), transparent);
+    animation: nameShine 2.5s ease-in-out infinite;
+}
+@keyframes nameShine {
+    0%   { left: -100%; }
+    100% { left: 200%;  }
+}
 }
 
 /* Brillo animado en el nombre */
