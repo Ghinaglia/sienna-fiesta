@@ -280,119 +280,29 @@ body {
 .baby-name {
     font-family: var(--font-title);
     font-size: clamp(2.8rem, 8vw, 4.2rem);
-    color: var(--pink);
     line-height: 1.1;
     position: relative;
     display: inline-block;
-    text-shadow:
-        0 0 10px rgba(255, 20, 147, 0.8),
-        0 0 20px rgba(255, 20, 147, 0.6),
-        0 0 40px rgba(255, 105, 180, 0.5),
-        0 0 80px rgba(255, 215, 0, 0.3);
-    animation: nameGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes nameGlow {
-    from {
-        text-shadow:
-            0 0 10px rgba(255, 20, 147, 0.8),
-            0 0 20px rgba(255, 20, 147, 0.6),
-            0 0 40px rgba(255, 105, 180, 0.5),
-            0 0 80px rgba(255, 215, 0, 0.3);
-        filter: brightness(1);
-    }
-    to {
-        text-shadow:
-            0 0 20px rgba(255, 20, 147, 1),
-            0 0 40px rgba(255, 20, 147, 0.9),
-            0 0 80px rgba(255, 105, 180, 0.8),
-            0 0 120px rgba(255, 215, 0, 0.6);
-        filter: brightness(1.2);
-    }
-}
-
-/* Brillo animado en el nombre */
-.baby-name {
-    font-family: var(--font-title);
-    font-size: clamp(2.8rem, 8vw, 4.2rem);
-    line-height: 1.1;
-    position: relative;
-    display: inline-block;
-    background: linear-gradient(
-        135deg,
-        #ff69b4 0%,
-        #ffffff 25%,
-        #ff1493 40%,
-        #ffffff 55%,
-        #ffb6d9 70%,
-        #ffffff 80%,
-        #ff69b4 100%
-    );
-    background-size: 200% auto;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png'),
+                linear-gradient(135deg, #ff1493, #ff69b4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: glitter 2s linear infinite;
-    filter: drop-shadow(0 0 4px rgba(255, 20, 147, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(255, 20, 147, 0.4));
 }
 
-@keyframes glitter {
-    0%   { background-position: 0% center; }
-    100% { background-position: 200% center; }
-}
-
-/* Brillo deslizante */
-.baby-name {
-    font-family: var(--font-title);
-    font-size: clamp(2.8rem, 8vw, 4.2rem);
-    color: var(--pink);
-    line-height: 1.1;
-    position: relative;
-    display: inline-block;
-    text-shadow:
-        1px 1px 0px #fff,
-        -1px -1px 0px rgba(255,255,255,0.8),
-        2px 2px 0px rgba(255,255,255,0.4),
-        0 0 8px rgba(255,255,255,0.9),
-        0 0 2px rgba(255,255,255,1);
-    filter: drop-shadow(0 2px 6px rgba(255, 20, 147, 0.4));
-}
-
-/* Escarcha deslizante */
 .baby-name::after {
     content: "";
     position: absolute;
     top: 0; left: -100%;
     width: 60%; height: 100%;
-    background: linear-gradient(
-        105deg,
-        transparent 30%,
-        rgba(255,255,255,0.9) 50%,
-        rgba(255,255,255,0.4) 55%,
-        transparent 70%
-    );
-    animation: nameShine 2s ease-in-out infinite;
-}
-@keyframes nameShine {
-    0%   { left: -100%; }
-    100% { left: 200%;  }
-}
-}
-}
+    background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.85) 50%, transparent 70%);
+    animation: nameShine 2.5s ease-in-out infinite;
 }
 
-/* Brillo animado en el nombre */
-.baby-name::after {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 50%; height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
-    animation: nameShine 3.5s ease-in-out infinite;
-}
 @keyframes nameShine {
     0%   { left: -100%; }
-    100% { left: 200%;  }
+    100% { left: 200%; }
 }
 
 .baby-lastname {
