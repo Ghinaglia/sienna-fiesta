@@ -280,25 +280,17 @@ body {
 .baby-name {
     font-family: var(--font-title);
     font-size: clamp(2.8rem, 8vw, 4.2rem);
+    color: var(--pink);
     line-height: 1.1;
     position: relative;
     display: inline-block;
-    background: url('https://www.transparenttextures.com/patterns/stardust.png'),
-                linear-gradient(135deg, #ff1493, #ff69b4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 2px 4px rgba(255, 20, 147, 0.4));
+    text-shadow:
+        2px 2px 0px rgba(255,255,255,0.6),
+        -1px -1px 0px rgba(255,255,255,0.4),
+        0 4px 12px rgba(255, 20, 147, 0.35);
 }
 
-.baby-name::after {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 60%; height: 100%;
-    background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.85) 50%, transparent 70%);
-    animation: nameShine 2.5s ease-in-out infinite;
-}
+.baby-name::after { display: none; }
 
 @keyframes nameShine {
     0%   { left: -100%; }
