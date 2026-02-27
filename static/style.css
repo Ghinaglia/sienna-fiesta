@@ -342,17 +342,41 @@ body {
 }
 
 /* Brillo deslizante */
+.baby-name {
+    font-family: var(--font-title);
+    font-size: clamp(2.8rem, 8vw, 4.2rem);
+    color: var(--pink);
+    line-height: 1.1;
+    position: relative;
+    display: inline-block;
+    text-shadow:
+        1px 1px 0px #fff,
+        -1px -1px 0px rgba(255,255,255,0.8),
+        2px 2px 0px rgba(255,255,255,0.4),
+        0 0 8px rgba(255,255,255,0.9),
+        0 0 2px rgba(255,255,255,1);
+    filter: drop-shadow(0 2px 6px rgba(255, 20, 147, 0.4));
+}
+
+/* Escarcha deslizante */
 .baby-name::after {
     content: "";
     position: absolute;
     top: 0; left: -100%;
-    width: 40%; height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.95), transparent);
+    width: 60%; height: 100%;
+    background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255,255,255,0.9) 50%,
+        rgba(255,255,255,0.4) 55%,
+        transparent 70%
+    );
     animation: nameShine 2s ease-in-out infinite;
 }
 @keyframes nameShine {
     0%   { left: -100%; }
     100% { left: 200%;  }
+}
 }
 }
 }
