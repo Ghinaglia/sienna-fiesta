@@ -177,11 +177,13 @@ body {
     margin: 110px auto 100px;
     background: linear-gradient(to bottom,
         #0d0025 0%,
-        #2a0050 8%,
-        #6b0080 18%,
-        #fff0f8 30%,
-        #ffffff 45%,
-        #fff0f8 75%,
+        #2a0050 5%,
+        #5a0078 14%,
+        #cc0077 22%,
+        #ff69b4 30%,
+        #fff0f8 38%,
+        #ffffff 50%,
+        #fff0f8 80%,
         #fce7ff 100%
     );
     border-radius: 40px;
@@ -274,9 +276,10 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(to bottom, #0d0025 0%, #2a0050 30%, #6b0080 60%, #fff0f8 100%);
+    background: transparent;
 }
 
+/* Estrellas decorativas */
 .name-section::before {
     content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦";
     position: absolute;
@@ -284,30 +287,13 @@ body {
     left: 0; right: 0;
     text-align: center;
     font-size: 0.7rem;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.5);
     letter-spacing: 8px;
     animation: twinkleStars 3s ease-in-out infinite alternate;
+    pointer-events: none;
 }
 
-.name-section::after {
-    content: "";
-    position: absolute;
-    bottom: 30%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 100px;
-    background: linear-gradient(to top, #4a0070, #6b0090);
-    box-shadow:
-        -80px 0 0 10px #4a0070,
-        80px 0 0 10px #4a0070,
-        -80px -30px 0 10px #3a0060,
-        80px -30px 0 10px #3a0060,
-        -40px -50px 0 5px #2a0050,
-        40px -50px 0 5px #2a0050;
-    opacity: 0.5;
-    filter: blur(1px);
-}
+.name-section::after { display: none; }
 
 @keyframes twinkleStars {
     from { opacity: 0.4; }
@@ -334,9 +320,9 @@ body {
     z-index: 2;
     display: inline-block;
     text-shadow:
-        2px 2px 0px rgba(255,20,147,0.9),
+        2px 2px 0px rgba(200,0,100,0.8),
         0 0 20px rgba(255,105,180,0.9),
-        0 4px 16px rgba(0,0,0,0.5);
+        0 4px 16px rgba(0,0,0,0.4);
 }
 
 .baby-name::after { display: none; }
@@ -381,10 +367,11 @@ body {
     gap: 20px;
     margin: 0 30px 0;
     padding: 26px 30px;
-    background: linear-gradient(135deg, #fdf0ff, #fff0f8);
+    background: rgba(255,255,255,0.85);
     border-radius: 30px;
     border: 2px dashed var(--pink-light);
     text-align: left;
+    backdrop-filter: blur(4px);
 }
 
 .luli-quote-img { flex-shrink: 0; }
@@ -438,7 +425,7 @@ body {
 }
 
 .event-card {
-    background: linear-gradient(135deg, #fff0f8, #fce7ff);
+    background: rgba(255,240,248,0.9);
     border-radius: 22px;
     padding: 22px 16px;
     border: 2px solid rgba(255,20,147,0.12);
@@ -446,7 +433,6 @@ body {
     transition: transform 0.25s ease;
 }
 .event-card:hover { transform: translateY(-4px); }
-
 .event-card.wide { grid-column: 1 / -1; }
 
 .event-icon { font-size: 1.8rem; margin-bottom: 6px; }
@@ -667,7 +653,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, #fce7ff, #fff0f8);
+    background: rgba(252,231,255,0.9);
     border-radius: 24px;
     padding: 40px;
     font-family: var(--font-main);
