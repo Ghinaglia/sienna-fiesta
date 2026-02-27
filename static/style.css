@@ -153,7 +153,6 @@ body {
     filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
 }
 
-/* Esconder personajes en pantallas pequeñas */
 @media (max-width: 900px) {
     .side-character { display: none; }
 }
@@ -176,7 +175,15 @@ body {
     width: 95%;
     max-width: 720px;
     margin: 110px auto 100px;
-    background: var(--white);
+    background: linear-gradient(to bottom,
+        #0d0025 0%,
+        #2a0050 8%,
+        #6b0080 18%,
+        #fff0f8 30%,
+        #ffffff 45%,
+        #fff0f8 75%,
+        #fce7ff 100%
+    );
     border-radius: 40px;
     box-shadow:
         0 0 0 6px var(--gold),
@@ -204,7 +211,6 @@ body {
     overflow: hidden;
 }
 
-/* Fondo brillante del hero */
 .hero-section::before {
     content: "";
     position: absolute;
@@ -244,7 +250,7 @@ body {
 }
 
 @keyframes heroFloat {
-    0%, 100% { transform: translateY(0);   }
+    0%, 100% { transform: translateY(0); }
     50%       { transform: translateY(-12px); }
 }
 
@@ -268,11 +274,9 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
-    background:
-        linear-gradient(to bottom, #0d0025 0%, #2a0050 30%, #6b0080 60%, #fff0f8 100%);
+    background: linear-gradient(to bottom, #0d0025 0%, #2a0050 30%, #6b0080 60%, #fff0f8 100%);
 }
 
-/* Cielo estrellado */
 .name-section::before {
     content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦";
     position: absolute;
@@ -285,7 +289,6 @@ body {
     animation: twinkleStars 3s ease-in-out infinite alternate;
 }
 
-/* Castillo CSS */
 .name-section::after {
     content: "";
     position: absolute;
@@ -300,7 +303,6 @@ body {
         80px 0 0 10px #4a0070,
         -80px -30px 0 10px #3a0060,
         80px -30px 0 10px #3a0060,
-        0px -20px 0 0px #3a0060,
         -40px -50px 0 5px #2a0050,
         40px -50px 0 5px #2a0050;
     opacity: 0.5;
@@ -310,6 +312,31 @@ body {
 @keyframes twinkleStars {
     from { opacity: 0.4; }
     to   { opacity: 1; }
+}
+
+.pre-title {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.92);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
+}
+
+.baby-name {
+    font-family: var(--font-title);
+    font-size: clamp(2.8rem, 8vw, 4.2rem);
+    color: #fff;
+    line-height: 1.1;
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    text-shadow:
+        2px 2px 0px rgba(255,20,147,0.9),
+        0 0 20px rgba(255,105,180,0.9),
+        0 4px 16px rgba(0,0,0,0.5);
 }
 
 .baby-name::after { display: none; }
@@ -360,9 +387,7 @@ body {
     text-align: left;
 }
 
-.luli-quote-img {
-    flex-shrink: 0;
-}
+.luli-quote-img { flex-shrink: 0; }
 
 .luli-quote-img img {
     width: 90px;
@@ -422,9 +447,7 @@ body {
 }
 .event-card:hover { transform: translateY(-4px); }
 
-.event-card.wide {
-    grid-column: 1 / -1;
-}
+.event-card.wide { grid-column: 1 / -1; }
 
 .event-icon { font-size: 1.8rem; margin-bottom: 6px; }
 .event-label {
@@ -567,7 +590,7 @@ body {
 .rsvp-section {
     padding: 40px 40px;
     text-align: center;
-    background: linear-gradient(to bottom, var(--white), #fff0f8);
+    background: transparent;
 }
 
 .rsvp-subtitle {
@@ -685,7 +708,7 @@ body {
 .footer-section {
     padding: 30px 40px 50px;
     text-align: center;
-    background: linear-gradient(160deg, #fce7ff, #fff0f8);
+    background: transparent;
     font-family: var(--font-body);
     font-size: 1rem;
     color: var(--text-mid);
@@ -699,7 +722,6 @@ body {
 @keyframes heartPulse { to { transform: scale(1.08); letter-spacing: 6px; } }
 
 /* — Responsive / Mobile-first ————————— */
-
 input, select, textarea { font-size: 16px !important; }
 * { -webkit-tap-highlight-color: transparent; }
 html { -webkit-overflow-scrolling: touch; }
