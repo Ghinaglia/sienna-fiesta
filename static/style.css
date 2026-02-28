@@ -26,11 +26,12 @@ html { scroll-behavior: smooth; }
 body {
     font-family: var(--font-body);
     background:
-        radial-gradient(ellipse at 20% 50%, rgba(155, 0, 100, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(100, 0, 180, 0.5) 0%, transparent 45%),
-        radial-gradient(ellipse at 60% 80%, rgba(180, 0, 80, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at 10% 10%, rgba(80, 0, 150, 0.6) 0%, transparent 40%),
-        linear-gradient(160deg, #0a0020 0%, #2a0045 30%, #4a0035 60%, #1a0030 100%);
+        radial-gradient(ellipse at 15% 50%, rgba(180, 0, 120, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 20%, rgba(120, 0, 200, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(200, 0, 90, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 5%  10%, rgba(80,  0, 160, 0.5) 0%, transparent 40%),
+        radial-gradient(ellipse at 95% 90%, rgba(160, 0, 80,  0.4) 0%, transparent 40%),
+        linear-gradient(160deg, #080018 0%, #1e0038 25%, #380028 50%, #1a0035 75%, #0a0020 100%);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
@@ -49,6 +50,14 @@ body {
     background: white;
     border-radius: 50%;
     animation: twinkle var(--dur, 2s) ease-in-out infinite alternate;
+}
+.bg-star.gold {
+    background: radial-gradient(circle, #ffd700, #ffb700);
+    box-shadow: 0 0 4px rgba(255,215,0,0.8);
+}
+.bg-star.pink {
+    background: radial-gradient(circle, #ff69b4, #ff1493);
+    box-shadow: 0 0 4px rgba(255,105,180,0.8);
 }
 @keyframes twinkle {
     from { opacity: 0.15; transform: scale(0.8); }
@@ -832,4 +841,13 @@ button, .rsvp-btn, .music-btn { min-height: 44px; touch-action: manipulation; }
     font-size: 0.85rem;
     color: rgba(255,215,0,0.8);
     letter-spacing: 0.3px;
+}
+
+.confetti-emoji {
+    position: absolute;
+    top: -20px;
+    animation: confettiFall linear forwards;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }

@@ -295,49 +295,70 @@ setInterval(updateCountdown, 1000);
 updateCountdown();
 
 // =====================
-//  CONFETI 🎊
+//  CONFETI MEJORADO 🎊
 // =====================
-const CONFETTI_COLORS = ["#ff69b4","#ffd700","#ff1493","#c084fc","#fb923c","#34d399","#60a5fa","#f472b6"];
+const CONFETTI_SHAPES = ["💗", "⭐", "✨", "🌸", "💛", "🎀", "💜", "🌟"];
+const CONFETTI_COLORS = ["#ff69b4","#ffd700","#ff1493","#c084fc","#fb923c","#f472b6","#e879f9"];
 
 function createConfetti() {
+    const useEmoji = Math.random() > 0.5;
     const el = document.createElement("div");
-    el.classList.add("confetti-piece");
-    el.style.cssText = `
-        left: ${Math.random() * 100}vw;
-        background: ${CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)]};
-        width: ${Math.random() * 10 + 6}px;
-        height: ${Math.random() * 10 + 6}px;
-        border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
-        animation-duration: ${Math.random() * 3 + 2.5}s;
-        animation-delay: ${Math.random() * 1}s;
-        transform: rotate(${Math.random() * 360}deg);
-    `;
-    document.getElementById("confetti-container").appendChild(el);
-    setTimeout(() => el.remove(), 5500);
-}
-// Menos confeti en móvil para ahorrar batería
-const isMobile = window.innerWidth < 600;
-setInterval(createConfetti, isMobile ? 300 : 120);
 
+    if (useEmoji) {
+        el.classList.add("confetti-emoji");
+        el.textContent = CONFETTI_SHAPES[Math.floor(Math.random() * CONFETTI_SHAPES.length)];
+        el.style.cssText = `
+            left: ${Math.random() * 100}vw;
+            font-size: ${Math.random() * 16 + 10}px;
+            animation-duration: ${Math.random() * 4 + 3}s;
+            animation-delay: ${Math.random() * 1}s;
+        `;
+    } else {
+        el.classList.add("confetti-piece");
+        el.style.cssText = `
+            left: ${Math.random() * 100}vw;
+            background: ${CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)]};
+            width: ${Math.random() * 10 + 6}px;
+            height: ${Math.random() * 10 + 6}px;
+            border-radius: ${Math.random() > 0.5 ? "50%" : "3px"};
+            animation-duration: ${Math.random() * 4 + 3}s;
+            animation-delay: ${Math.random() * 1}s;
+            transform: rotate(${Math.random() * 360}deg);
+        `;
+    }
+
+    document.getElementById("confetti-container").appendChild(el);
+    setTimeout(() => el.remove(), 7000);
+}
+
+const isMobile = window.innerWidth < 600;
+setInterval(createConfetti, isMobile ? 400 : 150);
+
+// =====================
 // =====================
 //  ESTRELLAS DE FONDO
 // =====================
 const starsContainer = document.getElementById("starsBg");
-// Menos estrellas en móvil
-const starCount = window.innerWidth < 600 ? 30 : 60;
+const starCount = window.innerWidth < 600 ? 40 : 80;
+const starTypes = ["", "gold", "pink"];
+
 for (let i = 0; i < starCount; i++) {
     const star = document.createElement("div");
     star.classList.add("bg-star");
+    const type = starTypes[Math.floor(Math.random() * starTypes.length)];
+    if (type) star.classList.add(type);
+    const size = Math.random() * 5 + 1;
     star.style.cssText = `
         left: ${Math.random() * 100}%;
         top: ${Math.random() * 100}%;
-        width: ${Math.random() * 4 + 2}px;
-        height: ${Math.random() * 4 + 2}px;
-        animation-delay: ${Math.random() * 3}s;
-        animation-duration: ${Math.random() * 2 + 2}s;
+        width: ${size}px;
+        height: ${size}px;
+        animation-delay: ${Math.random() * 4}s;
+        animation-duration: ${Math.random() * 3 + 2}s;
     `;
     starsContainer.appendChild(star);
 }
+
 
 // =====================
 //  ENTRADA ANIMADA
