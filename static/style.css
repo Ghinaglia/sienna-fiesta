@@ -25,13 +25,17 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-body);
-    background: linear-gradient(160deg, #1a0030 0%, #4a0060 40%, #800040 100%);
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(155, 0, 100, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(100, 0, 180, 0.5) 0%, transparent 45%),
+        radial-gradient(ellipse at 60% 80%, rgba(180, 0, 80, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 10% 10%, rgba(80, 0, 150, 0.6) 0%, transparent 40%),
+        linear-gradient(160deg, #0a0020 0%, #2a0045 30%, #4a0035 60%, #1a0030 100%);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
     color: var(--text-dark);
 }
-
 /* — Fondo estrellas ———————————————————— */
 .stars-bg {
     position: fixed;
@@ -113,18 +117,10 @@ body {
 @keyframes spinStar { to { transform: rotate(360deg); } }
 .arch-text { font-weight: bold; }
 
-.curtain {
-    position: absolute;
-    top: 0;
-    width: 80px; height: 340px;
-    background: linear-gradient(to bottom, #cc007a, #ff1493, #cc007a);
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
-}
-.curtain-left  { left: 0; }
-.curtain-right { right: 0; transform: scaleX(-1); }
+/* — Cortinas 3D ————————————————————————— */
 
 /* — Personajes laterales —————————————— */
-.side-character {
+/*.side-character {
     position: fixed;
     bottom: 0;
     z-index: 5;
@@ -706,4 +702,134 @@ button, .rsvp-btn, .music-btn { min-height: 44px; touch-action: manipulation; }
     .arch-inner { font-size: 0.7rem; }
     .time-box   { min-width: 48px; }
     .time-num   { font-size: 1.3rem; }
+}
+
+/* — Pantalla de bienvenida ————————————— */
+.welcome-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #0d0025 0%, #3a0060 40%, #7a0045 100%);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.welcome-overlay.overlay-hide {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+}
+.welcome-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+.w-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--dur, 2s) ease-in-out infinite alternate;
+}
+.welcome-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 50px 40px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 40px;
+    border: 2px solid rgba(255,215,0,0.4);
+    box-shadow:
+        0 0 0 4px rgba(255,215,0,0.15),
+        0 30px 80px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    animation: welcomeFloat 4s ease-in-out infinite;
+}
+@keyframes welcomeFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-10px); }
+}
+.welcome-luli {
+    position: relative;
+    width: 140px; height: 140px;
+}
+.welcome-luli img {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 5px solid var(--gold);
+    box-shadow: 0 0 0 8px rgba(255,215,0,0.2), 0 20px 50px rgba(0,0,0,0.4);
+    position: relative; z-index: 2;
+}
+.welcome-glow {
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,105,180,0.6), transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+    z-index: 1;
+}
+.welcome-crown {
+    font-size: 2rem;
+    margin-top: -10px;
+    animation: crownBounce 1.5s ease-in-out infinite alternate;
+}
+@keyframes crownBounce {
+    from { transform: translateY(0) rotate(-5deg); }
+    to   { transform: translateY(-6px) rotate(5deg); }
+}
+.welcome-title {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: #fff;
+    line-height: 1.2;
+    text-shadow:
+        0 0 20px rgba(255,105,180,0.9),
+        0 4px 12px rgba(0,0,0,0.4);
+}
+.welcome-sub {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: rgba(255,220,240,0.9);
+    font-weight: 600;
+}
+.welcome-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: white;
+    border: none;
+    padding: 18px 36px;
+    border-radius: 50px;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow:
+        0 10px 35px rgba(255,20,147,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 0.5px;
+    animation: btnPulse 2s ease-in-out infinite;
+}
+@keyframes btnPulse {
+    0%, 100% { box-shadow: 0 10px 35px rgba(255,20,147,0.5); }
+    50%       { box-shadow: 0 10px 50px rgba(255,20,147,0.8), 0 0 30px rgba(255,105,180,0.4); }
+}
+.welcome-btn:hover {
+    transform: scale(1.06) translateY(-2px);
+}
+.welcome-btn:active { transform: scale(0.97); }
+.welcome-btn-icon { font-size: 1.3rem; }
+.welcome-music-hint {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: rgba(255,215,0,0.8);
+    letter-spacing: 0.3px;
 }

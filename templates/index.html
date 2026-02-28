@@ -8,6 +8,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<!-- Pantalla de bienvenida -->
+<div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-stars" id="welcomeStars"></div>
+    <div class="welcome-box">
+        <div class="welcome-luli">
+            <img src="{{ url_for('static', filename='lulipanpin2.png') }}" alt="Lulipanpin">
+            <div class="welcome-glow"></div>
+        </div>
+        <div class="welcome-crown">👑</div>
+        <h1 class="welcome-title">¡Una invitación<br>muy especial!</h1>
+        <p class="welcome-sub">Toca para entrar a la magia ✨</p>
+        <button class="welcome-btn" id="welcomeBtn" onclick="enterParty()">
+            <span class="welcome-btn-icon">🎀</span>
+            <span class="welcome-btn-text">¡Entrar a la fiesta!</span>
+            <span class="welcome-btn-icon">🎀</span>
+        </button>
+        <p class="welcome-music-hint">🎵 Con música de Lulipanpin 🎵</p>
+    </div>
+</div>
 
 <!-- Fondo de estrellas animadas -->
 <div class="stars-bg" id="starsBg"></div>
@@ -15,15 +34,7 @@
 <!-- Confeti container -->
 <div id="confetti-container"></div>
 
-<!-- Personaje izquierda -->
-<div class="side-character left" id="charLeft">
-    <img src="{{ url_for('static', filename='lulipanpin.png') }}" alt="Lulipanpin">
-</div>
 
-<!-- Personaje derecha -->
-<div class="side-character right" id="charRight">
-    <img src="{{ url_for('static', filename='lulipanpin3.png') }}" alt="Lulipanpin">
-</div>
 
 <!-- Arco superior dorado -->
 <div class="stage-arch">
@@ -32,9 +43,7 @@
         <span class="arch-text">✨ Un día mágico te espera ✨</span>
         <span class="arch-star">⭐</span>
     </div>
-    <!-- Cortinas -->
-    <div class="curtain curtain-left"></div>
-    <div class="curtain curtain-right"></div>
+
 </div>
 
 <!-- Tarjeta principal -->
@@ -206,13 +215,14 @@
 let musicPlaying = false;
 const music = document.getElementById("bg-music");
 
-document.addEventListener("click", function() {
-    if (!musicPlaying) {
-        music.play().catch(() => {});
-        musicPlaying = true;
-        updateMusicBtn();
-    }
-}, { once: true });
+function enterParty() {
+    const overlay = document.getElementById("welcomeOverlay");
+    overlay.classList.add("overlay-hide");
+    setTimeout(() => overlay.remove(), 800);
+    music.play().catch(() => {});
+    musicPlaying = true;
+    updateMusicBtn();
+}
 
 function toggleMusic() {
     if (musicPlaying) {
@@ -237,6 +247,24 @@ function updateMusicBtn() {
         icon.textContent = "🎵";
         text.textContent = "Activar Música Mágica";
         btn.classList.remove("playing");
+    }
+}
+
+// Estrellas del overlay
+const ws = document.getElementById("welcomeStars");
+if (ws) {
+    for (let i = 0; i < 40; i++) {
+        const s = document.createElement("div");
+        s.classList.add("w-star");
+        s.style.cssText = `
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            width: ${Math.random() * 5 + 2}px;
+            height: ${Math.random() * 5 + 2}px;
+            animation-delay: ${Math.random() * 3}s;
+            animation-duration: ${Math.random() * 2 + 2}s;
+        `;
+        ws.appendChild(s);
     }
 }
 
@@ -317,10 +345,11 @@ for (let i = 0; i < starCount; i++) {
 window.addEventListener("load", () => {
     setTimeout(() => {
         document.getElementById("card").classList.add("card-visible");
-        document.getElementById("charLeft").classList.add("char-visible");
-        document.getElementById("charRight").classList.add("char-visible");
+
     }, 300);
 });
 </script>
+<!-- Cortinas de piso a techo -->
+
 </body>
 </html>
